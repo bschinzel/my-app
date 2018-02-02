@@ -1,0 +1,83 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+div.kw {
+  padding: 5px;
+  font-size: 0.75em;
+}
+
+div.tag {
+  padding: 5px;
+}
+
+div.woche-kommentar {
+  padding: 5px;
+}
+
+span.tag {
+  font-size: 1.5em;
+}
+
+div.highlight-monat-false.highlight-wochenende-false {
+  background-color: rgb(255, 255, 255);
+}
+
+div.highlight-monat-false.highlight-wochenende-true {
+  background-color: rgb(240, 240, 255);
+}
+
+div.highlight-monat-true.highlight-wochenende-true {
+  background-color: rgb(230, 230, 245);
+}
+
+div.highlight-monat-true.highlight-wochenende-false {
+  background-color: rgb(240, 240, 240);
+}
+
+.highlight-monat-false:hover, .highlight-wochenende-false:hover,
+.highlight-monat-true:hover, .highlight-wochenende-true:hover {
+  background-color: rgb(200, 200, 255) !important;
+  cursor: pointer;
+}
+
+div.highlight-feiertag-start {
+  border-top: 1px solid red;
+  border-bottom: 1px solid red;
+  border-left: 1px solid red;
+  border-radius: 5px 0px 0px 5px;
+}
+
+div.highlight-feiertag-mitte {
+  border-top: 1px solid red;
+  border-bottom: 1px solid red;
+  border-radius: 0px;
+}
+
+div.highlight-feiertag-ende {
+  border-top: 1px solid red;
+  border-bottom: 1px solid red;
+  border-right: 1px solid red;
+  border-radius: 0px 5px 5px 0px;
+}
+
+div.highlight-feiertag-einzeln {
+  border: 1px solid red;
+  border-radius: 5px 5px 5px 5px;
+}
+
+div.tooltip-container div.tooltip-text {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  background-color: rgb(240, 240, 240);
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+div.tooltip-container:hover div.tooltip-text {
+  visibility: visible;
+}
