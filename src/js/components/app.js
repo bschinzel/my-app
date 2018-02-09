@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import $ from 'jquery';
 
 class Tag extends React.Component {
@@ -196,7 +195,7 @@ class Kalender extends React.Component {
       }
     }
 
-    if (this.state.errorMessage !== null) {
+    if (this.state.errorMessage != null) {
       message = (<Message severity="danger" value={this.state.errorMessage} />);
     }
 
