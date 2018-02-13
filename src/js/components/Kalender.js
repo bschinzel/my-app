@@ -35,11 +35,6 @@ export default class Kalender extends React.Component {
         });
       }
 
-      for (var j = 1; j < data.length - 1; j++) {
-        data[j].prevTagFeiertag = (data[j - 1].feiertag != null);
-        data[j].nextTagFeiertag = (data[j + 1].feiertag != null);
-      }
-
       this.setState({
         tageDesJahres: data,
         selektiertesJahr: jahr
@@ -81,6 +76,8 @@ export default class Kalender extends React.Component {
     var kalenderwoche = 0;
     var message = null;
 
+    let octicons = require('octicons');
+
     for (var i = 0; i < this.state.tageDesJahres.length; i++) {
       tageDerWoche.push(this.state.tageDesJahres[i]);
 
@@ -97,10 +94,13 @@ export default class Kalender extends React.Component {
 
     return (
       <div id="kalender">
-        <h1>Kalender {this.state.selektiertesJahr}</h1>
+        <h1>Kalender</h1>
         {message}
-        <button type="button" onClick={this.handleClickNavigiereZurueck.bind(this)}>&lt;-</button>
-        <button type="button" onClick={this.handleClickNavigiereVor.bind(this)}>-&gt;</button>
+        <div className="d-flex d-md-inline-flex flex-row justify-content-between">
+          <button className="btn" type="button" dangerouslySetInnerHTML={{__html: octicons['triangle-left'].toSVG()}} onClick={this.handleClickNavigiereZurueck.bind(this)} />
+          <div className="align-self-center px-md-3">{this.state.selektiertesJahr}</div>
+          <button className="btn" type="button" dangerouslySetInnerHTML={{__html: octicons['triangle-right'].toSVG()}} onClick={this.handleClickNavigiereVor.bind(this)} />
+        </div>
         <div className="container-fluid">
           {wochen}
         </div>

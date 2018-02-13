@@ -1,7 +1,7 @@
 import 'bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/app.css';
+import 'octicons/build/build.css';
 import '../css/index.css';
 
 import React from 'react';

@@ -27,23 +27,12 @@ export default class Tag extends React.Component {
 
       var highlightMonat = this.props.tag.monat % 2 === 0;
 
-      var highlightFeiertag = "";
+      var highlightFeiertag = false;
       var feiertagTooltip = null;
 
       if (this.props.tag.feiertag != null) {
         feiertagTooltip = (<FeiertagTooltip details={this.props.tag.feiertag} />);
-
-        if (this.props.tag.prevTagFeiertag === true && this.props.tag.nextTagFeiertag === true) {
-          highlightFeiertag = "highlight-feiertag-mitte";
-        } else if (this.props.tag.prevTagFeiertag === true && this.props.tag.nextTagFeiertag === false) {
-          highlightFeiertag = "highlight-feiertag-ende";
-        } else if (this.props.tag.prevTagFeiertag === false && this.props.tag.nextTagFeiertag === true) {
-          highlightFeiertag = "highlight-feiertag-start";
-        } else if (this.props.tag.prevTagFeiertag === false && this.props.tag.nextTagFeiertag === false) {
-          highlightFeiertag = "highlight-feiertag-einzeln";
-        } else {
-          console.log(this.props.tag.prevTagFeiertag); // TODO
-        }
+        highlightFeiertag = true;
       }
 
       var highlightWochenende = this.props.tag.wochentag === "Sa" || this.props.tag.wochentag === "So";
@@ -54,10 +43,12 @@ export default class Tag extends React.Component {
           + " tag "
           + " col-md-1"
           + " highlight-wochenende-" + highlightWochenende
-          + " " + highlightFeiertag
           + " highlight-monat-" + highlightMonat + ""}>
-            <span className="tag">{this.props.tag.tag}</span>{monatsName}
+            <div className={"highlight-feiertag-" + highlightFeiertag}>
+              <span className="tag">{this.props.tag.tag}</span>{monatsName}
+            </div>
             {feiertagTooltip}
+            <span className={"d-inline-block d-md-none highlight-feiertag-" + highlightFeiertag}>{this.props.tag.wochentag}</span>
           </div>
       );
     }
