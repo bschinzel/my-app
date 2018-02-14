@@ -13,7 +13,8 @@ export default class Tag extends React.Component {
     }
 
     render() {
-      var monatsName = null;
+      let monatsName = null;
+      let anchor = null;
 
       if (this.props.tag.tag === 1) {
         const monatsNamenKurz = [
@@ -23,6 +24,7 @@ export default class Tag extends React.Component {
         ];
 
         monatsName = ". " +  monatsNamenKurz[this.props.tag.monat - 1];
+        anchor = (<a id={"monat-" + this.props.tag.monat} className="monat-anchor" />);
       }
 
       var highlightMonat = this.props.tag.monat % 2 === 0;
@@ -44,6 +46,7 @@ export default class Tag extends React.Component {
           + " col-md-1"
           + " highlight-wochenende-" + highlightWochenende
           + " highlight-monat-" + highlightMonat + ""}>
+            {anchor}
             <div className={"highlight-feiertag-" + highlightFeiertag}>
               <span className="tag">{this.props.tag.tag}</span>{monatsName}
             </div>

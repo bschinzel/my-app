@@ -94,13 +94,28 @@ export default class Kalender extends React.Component {
 
     return (
       <div id="kalender">
-        <h1>Kalender</h1>
+        <nav className="navbar fixed-bottom navbar-light bg-light">
+          <div className="d-flex d-md-inline-flex flex-row justify-content-between">
+            <button className="btn" type="button" dangerouslySetInnerHTML={{__html: octicons['triangle-left'].toSVG()}} onClick={this.handleClickNavigiereZurueck.bind(this)} />
+            <div className="align-self-center px-3">{this.state.selektiertesJahr}</div>
+            <button className="btn" type="button" dangerouslySetInnerHTML={{__html: octicons['triangle-right'].toSVG()}} onClick={this.handleClickNavigiereVor.bind(this)} />
+          </div>
+          <div className="d-flex d-md-inline-flex flex-row flex-wrap justify-content-left">
+            <a className="pr-3" href="#monat-1">Jan</a>
+            <a className="pr-3" href="#monat-2">Feb</a>
+            <a className="pr-3" href="#monat-3">Mrz</a>
+            <a className="pr-3" href="#monat-4">Apr</a>
+            <a className="pr-3" href="#monat-5">Mai</a>
+            <a className="pr-3" href="#monat-6">Jun</a>
+            <a className="pr-3" href="#monat-7">Jul</a>
+            <a className="pr-3" href="#monat-8">Aug</a>
+            <a className="pr-3" href="#monat-10">Okt</a>
+            <a className="pr-3" href="#monat-9">Sep</a>
+            <a className="pr-3" href="#monat-11">Nov</a>
+            <a                  href="#monat-12">Dez</a>
+          </div>
+        </nav>
         {message}
-        <div className="d-flex d-md-inline-flex flex-row justify-content-between">
-          <button className="btn" type="button" dangerouslySetInnerHTML={{__html: octicons['triangle-left'].toSVG()}} onClick={this.handleClickNavigiereZurueck.bind(this)} />
-          <div className="align-self-center px-md-3">{this.state.selektiertesJahr}</div>
-          <button className="btn" type="button" dangerouslySetInnerHTML={{__html: octicons['triangle-right'].toSVG()}} onClick={this.handleClickNavigiereVor.bind(this)} />
-        </div>
         <div className="container-fluid">
           {wochen}
         </div>
