@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import Message from './Message.js';
 import Woche from './Woche.js';
+import ErstelleAntragDialog from './ErstelleAntragDialog.js';
 
 export default class Kalender extends React.Component {
 
@@ -94,12 +95,14 @@ export default class Kalender extends React.Component {
 
     return (
       <div id="kalender">
+        <ErstelleAntragDialog />
         <nav className="navbar fixed-bottom navbar-light bg-light">
           <div className="d-flex d-md-inline-flex flex-row justify-content-between">
             <button className="btn" type="button" dangerouslySetInnerHTML={{__html: octicons['triangle-left'].toSVG()}} onClick={this.handleClickNavigiereZurueck.bind(this)} />
             <div className="align-self-center px-3">{this.state.selektiertesJahr}</div>
             <button className="btn" type="button" dangerouslySetInnerHTML={{__html: octicons['triangle-right'].toSVG()}} onClick={this.handleClickNavigiereVor.bind(this)} />
           </div>
+          <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#erstelle-antrag-dialog">Erstelle Antrag</button>
           <div className="d-flex d-md-inline-flex flex-row flex-wrap justify-content-left">
             <a className="pr-3" href="#monat-1">Jan</a>
             <a className="pr-3" href="#monat-2">Feb</a>
