@@ -1,15 +1,10 @@
 import React from 'react';
 import Tag from './Tag.js';
+import { MONATS_NAMEN_LANG } from '../constants.js';
 
 export default class Woche extends React.Component {
   render() {
-    const monatsNamenLang = [
-      "Januar", "Februar", "März", "April",
-      "Mai", "Juni", "Juli", "August",
-      "September", "Oktober", "November", "Dezember"
-    ];
-
-    let monatsName = monatsNamenLang[this.props.tage[0].monat - 1];
+    let monatsName = MONATS_NAMEN_LANG[this.props.tage[0].monat - 1];
 
     let tage = [];
 

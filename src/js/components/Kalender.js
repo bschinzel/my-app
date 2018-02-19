@@ -3,6 +3,7 @@ import $ from 'jquery';
 import Message from './Message.js';
 import Woche from './Woche.js';
 import ErstelleAntragDialog from './ErstelleAntragDialog.js';
+import { SERVICE_KALENDER, XHR_ERROR_NO_CONNECTION, XHR_ERROR_404, XHR_ERROR_500, XHR_ERROR_UNKNOWN, MONATS_NAMEN_KURZ } from '../constants.js';
 
 export default class Kalender extends React.Component {
 
@@ -17,7 +18,7 @@ export default class Kalender extends React.Component {
 
   requestKalender(jahr) {
     $.ajax({
-      url: "http://localhost:8080/kalender/v1/" + jahr
+      url: SERVICE_KALENDER + jahr
     }).then((data) => {
       const offsets = {
         "Mo": 0, "Di": 1, "Mi": 2, "Do": 3, "Fr": 4, "Sa": 5, "So": 6
@@ -44,14 +45,16 @@ export default class Kalender extends React.Component {
       let errorMessage = null;
 
       if (jqXHR.status === 0) {
-        errorMessage = "Eine Anfrage an den Server konnte nicht gesendet werden";
+        errorMessage = XHR_ERROR_NO_CONNECTION;
       } else if (jqXHR.status === 404) {
-        errorMessage = "Die angeforderte Seite wurde nicht gefunden";
+        errorMessage = XHR_ERROR_404;
       } else if (jqXHR.status === 500) {
-        errorMessage = "Interner Server Fehler";
+        errorMessage = XHR_ERROR_500;
       } else {
-        errorMessage = "Es ist ein unbekannter Fehler aufgetreten. Status Code: " + jqXHR.status + ", Meldung: " + exception;
+        errorMessage = XHR_ERROR_UNKNOWN + ". Status Code: " + jqXHR.status + ", Meldung: " + exception;
       }
+
+      console.error(errorMessage);
 
       this.setState({
         errorMessage: errorMessage
@@ -104,18 +107,18 @@ export default class Kalender extends React.Component {
           </div>
           <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#erstelle-antrag-dialog">Erstelle Antrag</button>
           <div className="d-flex d-md-inline-flex flex-row flex-wrap justify-content-left">
-            <a className="pr-3" href="#monat-1">Jan</a>
-            <a className="pr-3" href="#monat-2">Feb</a>
-            <a className="pr-3" href="#monat-3">Mrz</a>
-            <a className="pr-3" href="#monat-4">Apr</a>
-            <a className="pr-3" href="#monat-5">Mai</a>
-            <a className="pr-3" href="#monat-6">Jun</a>
-            <a className="pr-3" href="#monat-7">Jul</a>
-            <a className="pr-3" href="#monat-8">Aug</a>
-            <a className="pr-3" href="#monat-10">Okt</a>
-            <a className="pr-3" href="#monat-9">Sep</a>
-            <a className="pr-3" href="#monat-11">Nov</a>
-            <a                  href="#monat-12">Dez</a>
+            <a className="pr-3" href="#monat-1">{MONATS_NAMEN_KURZ[0]}</a>
+            <a className="pr-3" href="#monat-2">{MONATS_NAMEN_KURZ[1]}</a>
+            <a className="pr-3" href="#monat-3">{MONATS_NAMEN_KURZ[2]}</a>
+            <a className="pr-3" href="#monat-4">{MONATS_NAMEN_KURZ[3]}</a>
+            <a className="pr-3" href="#monat-5">{MONATS_NAMEN_KURZ[4]}</a>
+            <a className="pr-3" href="#monat-6">{MONATS_NAMEN_KURZ[5]}</a>
+            <a className="pr-3" href="#monat-7">{MONATS_NAMEN_KURZ[6]}</a>
+            <a className="pr-3" href="#monat-8">{MONATS_NAMEN_KURZ[7]}</a>
+            <a className="pr-3" href="#monat-9">{MONATS_NAMEN_KURZ[8]}</a>
+            <a className="pr-3" href="#monat-10">{MONATS_NAMEN_KURZ[9]}</a>
+            <a className="pr-3" href="#monat-11">{MONATS_NAMEN_KURZ[10]}</a>
+            <a                  href="#monat-12">{MONATS_NAMEN_KURZ[11]}</a>
           </div>
         </nav>
         {message}
