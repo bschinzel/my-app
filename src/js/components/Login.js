@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import Message from './Message.js';
+import { SERVICE_ORGANISATION, XHR_ERROR_NO_CONNECTION, XHR_ERROR_404, XHR_ERROR_500, XHR_ERROR_UNKNOWN } from '../constants.js';
 
 export default class Login extends React.Component {
 
@@ -23,7 +24,38 @@ export default class Login extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log(event);
+
+    $.ajax({
+      dataType: 'json',
+      method: 'GET',
+      headers: {
+        'X-Username': this.state.email,
+        'X-Password': this.state.passwort
+      },
+      url: SERVICE_ORGANISATION + "mitarbeiter/login",
+      cache: false
+    }).then((data) => {
+      console.log(data);
+    }, (jqXHR, exception) => {
+      let errorMessage = null;
+
+      if (jqXHR.status === 0) {
+        errorMessage = XHR_ERROR_NO_CONNECTION;
+      } else if (jqXHR.status === 404) {
+        errorMessage = "Falches Passwort oder EMail Adresse";
+      } else if (jqXHR.status === 500) {
+        errorMessage = XHR_ERROR_500;
+      } else {
+        errorMessage = XHR_ERROR_UNKNOWN + ". Status Code: " + jqXHR.status + ", Meldung: " + exception;
+      }
+
+      console.error(errorMessage);
+
+      this.setState({
+        errorMessage: errorMessage
+      });
+    });
+
     event.preventDefault();
   }
 
