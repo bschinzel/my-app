@@ -11,17 +11,22 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: false,
+      user: null
     }
+  }
+
+  onLogin(user) {
+    this.setState({isLoggedIn: true, user: user});
   }
 
   render() {
     if (!this.state.isLoggedIn) {
-      return (<Login />);
+      return (<Login onLogin={(user) => this.onLogin(user)} />);
     } else {
       return (
         <div>
-          <Navigation />
+          <Navigation userName={this.state.user.name} />
           <BrowserRouter>
             <Switch>
               <Route exact path="/" component={Kalender} />

@@ -25,7 +25,7 @@ export default class Navigation extends React.Component {
               <a className="nav-item nav-link disabled" href="#">Statistiken</a>
             </li>
             <li className="nav-item ml-lg-auto">
-              <a className="nav-item nav-link disabled" href="#" dangerouslySetInnerHTML={{__html: octicons.person.toSVG() + ' Mein Profil'}} />
+              <a className="nav-item nav-link disabled" href="#" dangerouslySetInnerHTML={{__html: octicons.person.toSVG() + ' ' + this.props.userName}} />
             </li>
           </ul>
         </div>

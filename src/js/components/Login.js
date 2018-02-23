@@ -10,13 +10,13 @@ export default class Login extends React.Component {
 
     this.state = {
       errorMessage: null,
-      email: "",
+      benutzerkennung: "",
       passwort: ""
     }
   }
 
-  handleChangeEMail(event) {
-    this.setState({email: event.target.value});
+  handleChangeBenutzerkennung(event) {
+    this.setState({benutzerkennung: event.target.value});
   }
 
   handleChangePasswort(event) {
@@ -25,24 +25,27 @@ export default class Login extends React.Component {
 
   handleSubmit(event) {
 
+    const crypto = require('crypto');
+    const passwortHash = crypto.createHmac('sha256', this.state.passwort).digest('hex');
+
     $.ajax({
       dataType: 'json',
       method: 'GET',
       headers: {
-        'X-Username': this.state.email,
-        'X-Password': this.state.passwort
+        'X-Benutzerkennung': this.state.benutzerkennung,
+        'X-Passwort': passwortHash
       },
       url: SERVICE_ORGANISATION + "mitarbeiter/login",
       cache: false
-    }).then((data) => {
-      console.log(data);
+    }).then((user) => {
+      this.props.onLogin(user);
     }, (jqXHR, exception) => {
       let errorMessage = null;
 
       if (jqXHR.status === 0) {
         errorMessage = XHR_ERROR_NO_CONNECTION;
       } else if (jqXHR.status === 404) {
-        errorMessage = "Falches Passwort oder EMail Adresse";
+        errorMessage = "Falsches Passwort oder Benutzerkennung";
       } else if (jqXHR.status === 500) {
         errorMessage = XHR_ERROR_500;
       } else {
@@ -75,8 +78,8 @@ export default class Login extends React.Component {
             onSubmit={(event) => this.handleSubmit(event)}>
             {message}
             <div className="form-group">
-              <label htmlFor="input-email">EMail</label>
-              <input value={this.state.email} onChange={(event) => this.handleChangeEMail(event)} type="email" className="form-control" id="input-email" />
+              <label htmlFor="input-benutzerkennung">EMail oder Benutzername</label>
+              <input value={this.state.benutzerkennung} onChange={(event) => this.handleChangeBenutzerkennung(event)} type="text" className="form-control" id="input-benutzerkennung" />
             </div>
             <div className="form-group">
               <label htmlFor="input-passwort">Passwort</label>
